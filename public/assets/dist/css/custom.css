@@ -1,0 +1,39 @@
+.nav-treeview>.nav-item>.nav-link.active{
+    background-color:  #09ff006e !important;
+}
+.nav-sidebar .nav-link p{
+    color: white !important;
+}
+.nav-sidebar .nav-treeview>.nav-item>.nav-link>.nav-icon{
+    color: white !important;
+}
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #6302e8 !important;
+}
+.page-item.active .page-link {
+    background-color: #6302e8 !important;
+    border-color: #6302e8 !important;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background-color: #6302e8 !important;
+    border: 1px solid #6302e8 !important;
+}
+
+.btn-custom{
+    color: #fff;
+    background-color: #6302e8 !important;
+    border-color: #6302e8 !important;
+    box-shadow: none;
+}
+.card-primary:not(.card-outline)>.card-header{
+    background-color: #6302e8 !important;
+}
+.custom-btn-danger{
+    color: #fff;
+    background-color: #ff006afa !important;
+    border-color: #ff006afa !important;
+    box-shadow: none;
+}
+
+/* #060457 */
+
