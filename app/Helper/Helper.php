@@ -18,6 +18,12 @@ if (!function_exists('academyType')) {
         return \App\Models\Admin\AcademicType::all();
     }
 }
+if (!function_exists('showAllChapter')) {
+    function showAllChapter()
+    {
+        return \App\Models\Admin\Chapter::all();
+    }
+}
 
 
 if (!function_exists('slug')) {

@@ -4,15 +4,16 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subject extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $fillable=[
         'academic_id',
         'subject_name',
         'subject_slug',
-        'status',
+        'status','deleted_at'
     ];
 
     public function academy(){

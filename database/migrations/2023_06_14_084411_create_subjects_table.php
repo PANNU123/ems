@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('subject_name');
             $table->string('subject_slug');
             $table->enum('status',['active','inactive'])->default('active');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

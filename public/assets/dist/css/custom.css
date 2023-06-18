@@ -35,5 +35,9 @@
     box-shadow: none;
 }
 
+.error {
+    color: red !important;
+}
+
 /* #060457 */
 

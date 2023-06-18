@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('academic_type_name');
             $table->string('academic_type_slug');
             $table->enum('status',['active','inactive'])->default('active');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

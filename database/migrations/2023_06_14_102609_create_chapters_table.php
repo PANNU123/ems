@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('chapter_name');
             $table->string('chapter_slug');
             $table->enum('status',['active','inactive'])->default('active');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

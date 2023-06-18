@@ -19,9 +19,11 @@ return new class extends Migration
             $table->integer('marks');
             $table->text('question_text');
             $table->integer('academic_id')->nullable();
-            $table->integer('question_cat_id')->nullable();
-            $table->text('hint')->nullable();
+            $table->text('question_hint')->nullable();
             $table->text('question_detail')->nullable();
+            $table->text('question_solution')->nullable();
+            $table->enum('status',['active','inactive'])->default('active');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }
