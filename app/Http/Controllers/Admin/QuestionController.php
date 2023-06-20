@@ -16,11 +16,11 @@ class QuestionController extends Controller
 //        return $data = Question::with('mcqquestion')->where('chapter_id',$id)->latest()->get();
         $chapter_id = $id;
         if ($request->ajax()) {
-            $data = Question::with('mcqquestion')->where('chapter_id',$id)->latest()->get();
+            $data = Question::with('mcqquestion')->where('chapter_id',$id)->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $btn = '<a href="javascript:void(0)" class="btn btn-primary btn-sm "><i data-id="'.$data->id.'" class="fas fa-edit editQuestion"></i></a>';
+                    $btn = '<a href="'.route('backend.question.edit',$data->id).'" class="btn btn-primary btn-sm "><i data-id="'.$data->id.'" class="fas fa-edit editQuestion"></i></a>';
                     $btn =$btn.'<a href="javascript:void(0)" class="btn btn-danger btn-sm ml-2 "><i data-id="'.$data->id.'" class="fas fa-trash deleteQuestion"></i></a>';
                     if($data->status == 'active'){
                         $btn =$btn.'<a href="javascript:void(0)" class="btn btn-warning btn-sm ml-2 "><i data-id="'.$data->id.'" style="color: white" class="fas fa-arrow-down inactiveQuestion"></i></a>';
@@ -44,7 +44,7 @@ class QuestionController extends Controller
                         return '<span class="badge bg-warning">InActive</span>';
                     }
                 })
-                ->rawColumns(['action','Chapter','Status'])
+                ->rawColumns(['action','Question','Question_Type','Status'])
                 ->make(true);
         }
         return view('admin.pages.question.index',compact('chapter_id',));
@@ -92,6 +92,11 @@ class QuestionController extends Controller
             Toastr::error('', 'Data Does not stored', ["positionClass" => "toast-bottom-right"]);
             return redirect()->back();
         }
+    }
+
+    public function edit($id){
+        $data = Question::with('mcqquestion')->where('id',$id)->first();
+        return view('admin.pages.question.edit',compact('data'));
     }
 
     public function delete($id){

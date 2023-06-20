@@ -24,7 +24,14 @@ if (!function_exists('showAllChapter')) {
         return \App\Models\Admin\Chapter::all();
     }
 }
-
+if (!function_exists('difficultyLevel')) {
+    function difficultyLevel()
+    {
+        return [
+            '10','20','30','40','50','60','70','80','90','100',
+        ];
+    }
+}
 
 if (!function_exists('slug')) {
      function slug($text){

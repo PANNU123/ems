@@ -113,6 +113,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth','prevent-back-history'
             Route::get('create/{id}','create')->name('create');
             Route::post('/store','store')->name('store');
             Route::get('/edit/{id}','edit')->name('edit');
+            Route::get('/update','update')->name('update');
             Route::get('/delete/{id}','delete')->name('delete');
             Route::get('/active/chapter-status','active')->name('status.active');
             Route::get('/inactive/chapter-status','inactive')->name('status.inactive');

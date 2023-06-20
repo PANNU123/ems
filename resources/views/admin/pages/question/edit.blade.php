@@ -5,16 +5,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10 offset-1">
-
-                    <section class="content">
-                        <div class="container-fluid">
-                            <div class="row pb-3">
-                                <div class="col-3">
-                                    <a href="{{route('backend.question.index',$chapter_id)}}" class="btn btn btn-block btn-custom text-white">Question List</a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
                     <div class="card card-primary">
                         <div class="card-header"></div>
                         <form action="{{route('backend.question.store')}}" method="post" id="questionAddForm">
@@ -24,16 +14,9 @@
                                     <div class="col-3">
                                         <label>Difficulty Level</label>
                                         <select class="form-control" name="difficulty_level" id="difficulty_level">
-                                            <option value="10">10%</option>
-                                            <option value="20">20%</option>
-                                            <option value="30">30%</option>
-                                            <option value="40">40%</option>
-                                            <option value="50">50%</option>
-                                            <option value="60">60%</option>
-                                            <option value="70">70%</option>
-                                            <option value="80">80%</option>
-                                            <option value="90">90%</option>
-                                            <option value="100">100%</option>
+                                            @foreach(difficultyLevel() as $item)
+                                                <option value="{{$item}}">{{$item}}%</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-3">
@@ -44,13 +27,13 @@
                                     </div>
                                     <div class="col-3">
                                         <label>Marks</label>
-                                        <input type="number" name="marks" id="marks" class="form-control" placeholder="Enter marks">
+                                        <input type="number" name="marks" id="marks" class="form-control" placeholder="Enter marks" value="{{$data->marks}}">
                                     </div>
                                     <div class="col-3">
                                         <label>Chapter</label>
                                         <select class="form-control" name="chapter_id" id="chapter_id">
                                             @foreach(showAllChapter() as $chapter)
-                                                <option  value="{{$chapter->id}}" {{$chapter->id == $chapter_id ? "selected" : ""}}>{{$chapter->chapter_name}}</option>
+                                                <option  value="{{$chapter->id}} {{$chapter->id == $data->chapter_id ? "selected" : ""}}">{{$chapter->chapter_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -59,28 +42,28 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <label>Write Question</label>
-                                        <textarea name="question_text" id="question_text" class="summernote" required></textarea>
+                                        <textarea name="question_text" id="question_text" class="summernote" required>{!! $data->question_text !!}</textarea>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-6">
                                         <label>Option 1</label>
-                                        <textarea name="option_one" id="option_one" class="summernote" required></textarea>
+                                        <textarea name="option_one" id="option_one" class="summernote" required>{!! $data->mcqquestion->option_one !!}</textarea>
                                     </div>
                                     <div class="col-6">
                                         <label>Option 2</label>
-                                        <textarea name="option_two" id="option_two" class="summernote" required></textarea>
+                                        <textarea name="option_two" id="option_two" class="summernote" required>{!! $data->mcqquestion->option_two !!}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
                                         <label>Option 3</label>
-                                        <textarea name="option_three" id="option_three" class="summernote" required></textarea>
+                                        <textarea name="option_three" id="option_three" class="summernote" required>{!! $data->mcqquestion->option_three !!}</textarea>
                                     </div>
                                     <div class="col-6">
                                         <label>Option 4</label>
-                                        <textarea name="option_four" id="option_four" class="summernote" required></textarea>
+                                        <textarea name="option_four" id="option_four" class="summernote" required>{!! $data->mcqquestion->option_four !!}</textarea>
                                     </div>
                                 </div>
                                 <br>
@@ -88,10 +71,10 @@
                                     <div class="col-12">
                                         <label>Correct Option</label>
                                         <select class="form-control" name="correct_answer" id="correct_answer">
-                                            <option value="option_1">option 1</option>
-                                            <option value="option_2">option 2</option>
-                                            <option value="option_3">option 3</option>
-                                            <option value="option_4">option 4</option>
+                                            <option value="option_1" {{$data->mcqquestion->correct_answer == 'option_1' ? "selected" : ""}}>option 1</option>
+                                            <option value="option_2" {{$data->mcqquestion->correct_answer == 'option_2' ? "selected" : ""}}>option 2</option>
+                                            <option value="option_3" {{$data->mcqquestion->correct_answer == 'option_3' ? "selected" : ""}}>option 3</option>
+                                            <option value="option_4" {{$data->mcqquestion->correct_answer == 'option_4' ? "selected" : ""}}>option 4</option>
                                         </select>
                                     </div>
                                 </div>
@@ -101,15 +84,6 @@
                                         <div class="form-group">
                                             <label>Hint (If any)</label>
                                             <input type="text" name="question_hint" id="question_hint" class="form-control" placeholder="Write question hint">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Select</label>
-                                            <input type="text" name="year" id="year" class="form-control" placeholder="Write Year">
                                         </div>
                                     </div>
                                 </div>

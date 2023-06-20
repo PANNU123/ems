@@ -4,10 +4,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="row pb-3 justify-content-between">
-                <div class="col-2">
-                    <a type="button">-</a>
-                </div>
+            <div class="row pb-3">
                 <div class="col-2">
                     <a href="{{route('backend.question.create',$chapter_id)}}" class="btn btn btn-block btn-custom text-white">Add New Question</a>
                 </div>
@@ -87,67 +84,6 @@
                         orderable: false
                     }
                 ]
-            });
-
-
-            $('#createChapter').click(function () {
-                $('#saveBtn').html("Save");
-                $('#modelHeading').html("Chapter Add Form");
-                $('#ajaxModelChapter').modal('show');
-            });
-            $('.closeBtn').click(function () {
-                $('#ajaxModelChapter').modal('hide');
-                $('#chapterForm').trigger('reset');
-            });
-            $('body').on('click', '.editChapter', function () {
-                var id = $(this).data('id');
-                $.ajax({
-                    method: "GET",
-                    dataType: "json",
-                    url: '/admin/chapter/edit/' + id,
-                    success: function (data) {
-                        $('#id').val(id);
-                        $('#subject_id').val(data.subject_id);
-                        $('#chapter_name').val(data.chapter_name);
-                        $('#status').val(data.status);
-                        $('#modelHeading').html("Edit Subject Form");
-                        $('#saveBtn').html("Update");
-                        $('#ajaxModelChapter').modal('show');
-                    }
-                })
-            });
-            $(".saveBtn").on('click', function (e) {
-                e.preventDefault();
-                let formdata = new FormData(document.getElementById("chapterForm"));
-
-                $.ajax({
-                    url: '{{ route('backend.chapter.store') }}',
-                    method: 'post',
-                    data: formdata,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        console.log(data);
-                        if (data.success === true) {
-                            toastr["success"]("Store successfully");
-                            $('#chapterForm').trigger("reset");
-                            $('#ajaxModelChapter').modal('hide');
-                            table.draw();
-                        } else {
-                            toastr["error"]("Need Data");
-                            $('#chapterForm').trigger("reset");
-                            table.draw();
-                        }
-                    },
-                    error: function (reject) {
-                        var response = $.parseJSON(reject.responseText);
-                        $.each(response.errors, function (key, val) {
-                            $("#" + key + "_error").text(val[0]);
-                        })
-                        toastr["error"](response.message);
-                    }
-                });
             });
 
             $(document).on('click', '.deleteQuestion', function (e) {
